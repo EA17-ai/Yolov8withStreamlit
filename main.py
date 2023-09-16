@@ -6,6 +6,16 @@ from PIL import Image
 import streamlit as st
 import cv2
 from pytube import YouTube
+import os
+
+
+path = "images"
+# Check whether the specified path exists or not
+isExist = os.path.exists(path)
+if not isExist:
+    # Create a new directory because it does not exist
+    os.makedirs(path)
+    print("The new directory is created!")
 
 
 # Function to load the YOLO model
@@ -44,6 +54,7 @@ option = st.sidebar.selectbox(
 
 # Option for processing a photo
 if option == "Photo":
+    os.mkdir("images/")
     objects_list = [classNames.index(option) for option in st.sidebar.multiselect(
         'Pick Objects', options=classNames)]
 
